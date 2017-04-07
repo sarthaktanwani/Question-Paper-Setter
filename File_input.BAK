@@ -1,0 +1,168 @@
+#include<fstream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<iomanip.h>
+#include<string.h>
+#include<stdlib.h>
+#include<process.h>
+#include<dos.h>
+class type
+  {
+     int marks;
+     char ques[40][80];
+   public:
+     void input();
+     void output();
+     void show();
+     void set_marks(int);
+     int returnmarks();
+     void addq();
+     void delq();
+     void modify();
+  }type1,type2,type3;          //1,2,3 marks
+void type::input()
+  {
+   int n;
+   cout<<"\nEnter number of questions(atleast 4): ";
+   cin>>n;
+   while(n<4)
+     {
+     cout<<"Enter a number greater than 4: ";
+     cin>>n;
+     cout<<endl;
+     }
+   for(int i=0;i<n;i++)
+     {
+     cout<<"\t ENTER QUESTION "<<i+1<<": ";
+     gets(ques[i]);
+     }
+  }
+void type::set_marks(int x)
+  {
+   marks=x;
+  }
+int check(char a[10],char b[10])
+{int i;
+    for(i=0;i<10;i++)
+    {
+	if(a[i]!=b[i])
+	{
+	break;
+	}
+    }
+    if(i==10)
+    return 1;
+    else
+    return 0;
+}
+
+void main()
+ {
+clrscr();
+gotoxy(23,7);
+textcolor(YELLOW);
+cputs("********* W E L C O M E ********* " );
+gotoxy(24,9);
+cputs(" BLUEBELLS SCHOOL INTERNATIONAL " );
+gotoxy(20,12);
+cputs(" I N P U T  T E S T  Q U E S T I O N S ");
+textcolor(BLUE);
+sound(2000);
+delay(120);
+nosound();
+gotoxy(37,14);
+cputs("DONE BY: ");
+gotoxy(34,16);
+cputs("SARTHAK TANWANI");
+gotoxy(36,17);
+cputs("AYUSH GUPTA");
+gotoxy(19,25);
+cputs("******** PRESS ANY KEY TO CONTINUE ********* ");
+getch();
+textcolor(GREEN);
+clrscr();
+char pwd[10],def[]="AYUSHGUPTA",user[100];
+int i=0,mycheck;
+gotoxy(15,2);
+	for(int a=1;a<=50;a++)
+		{
+		cout<<"-";
+		}
+		    cout<<endl;
+	for(int b=1;b<=20;b++)
+	    {
+	    for(int c=1;c<=50;c++)
+		{
+			for(int d=3;d<=13;d++)
+			    {
+			    gotoxy(14,d);
+			    cout<<"|";
+			    }
+		}
+	       }
+	for(int e=1;e<=20;e++)
+	    {
+	    for(int f=1;f<=50;f++)
+		{
+			for(int g=3;g<=13;g++)
+			    {
+			    gotoxy(65,g);
+			    cout<<"|";
+			    }
+		}
+	       }
+	for(int h=15;h<=64;h++)
+	 {
+	 gotoxy(h,14);
+	 cout<<"-";
+	 }
+gotoxy(17,5);
+cout<<"ENTER USERNAME:-";
+gets(user);
+gotoxy(17,7);
+cout<<"ENTER PASSWORD (upto 10 digits):-";
+while(i<10)
+{
+pwd[i]=getch();
+cout<<"*";
+++i;
+}
+getch();
+gotoxy(17,9);
+mycheck=check(pwd,def);
+if (mycheck==1)
+ {
+ cout<<"\n\t\t\t\tPLEASE WAIT..."<<endl;
+ delay(2000);
+ }
+else
+  {
+  cout<<"\n\t\t\t      INCORRECT PASSWORD";
+  cout<<"\n\n\t\t\t\t  BREAKING...";
+  delay(2000);
+  exit(0);
+  }
+ textcolor(WHITE);
+ clrscr();
+ int j,k;
+ randomize();
+ fstream fil;
+ fil.open("paper",ios::binary | ios::out);
+   cout<<"ENTER 1 MARK QUESTIONS\n\n";
+   type1.input();
+   type1.set_marks(1);
+   fil.write((char*) &type1,sizeof(type1));
+   cout<<endl;
+   cout<<"ENTER 2 MARK QUESTIONS\n\n";
+    type2.input();
+    type2.set_marks(4);
+    fil.write((char*) &type2,sizeof(type2));
+    cout<<endl;
+  cout<<"ENTER 3 MARK QUESTIONS\n"<<endl;
+  type3.input();
+  type3.set_marks(6);
+  fil.write((char*) &type3,sizeof(type3));
+  cout<<endl;
+  fil.close();
+  getch();
+ }
